@@ -1,0 +1,40 @@
+#mySidenav {
+    margin-top:7px;
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #2c3e50;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+#mySidenav a {
+    padding: 4px 4px 4px 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    background-color: #34495e;
+    color: #2ecc71;
+    margin: 3px;
+    margin-right: 5px;
+}
+
+#mySidenav a:hover, .offcanvas a:focus{
+    color: white;
+    background: #2c3e50;
+}
+
+#del{
+    background:#; 
+    color:# ;   
+}
+
+
+#abc{
+    background: black;
+    color: white;
+
+}   
