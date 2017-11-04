@@ -1,11 +1,31 @@
 <?php
-
 include 'config.php';
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+include 'session.php';
+ 
+if (isset($_POST['submit']))    
+{    
+        include 'config.php';
+        $target = "city/".basename($_FILES['image']['name']);
+        $conn = mysqli_connect("localhost" , "root" , "seoul" , "travel");
+        $image = $_FILES['image']['name'];
+        $c_name=$_POST['c_name'];
+        $c_description = mysqli_real_escape_string($conn, $_POST['c_description']);
 
+        $sql = "INSERT INTO city (c_name,c_description,c_image) VALUES ('$c_name','$c_description','$image')";
+        mysqli_query($conn , $sql);
+        
+        if (move_uploaded_file($_FILES['image']['tmp_name'] , $target))
+        {
+            echo "uploaded";
+            header('Location:adm_city.php');
+        }
+        else
+        {
+            echo "error ".$conn->error;   
+        }
+}
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,11 +34,8 @@ if ($conn->connect_error) {
 <link href="pagination/css/pagination.css" rel="stylesheet" type="text/css" />
 <link href="pagination/css/A_green.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-<?php 
-include 'session.php';
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +103,7 @@ include 'session.php';
                 <fieldset>
                 <legend style="color: white;">Add City</legend>
 
-              <form action="adm_city_add.php" method="post" enctype="multipart/form-data">
+              <form action="adm_city.php" method="post" enctype="multipart/form-data">
                   <span style="color: red;">*</span>Add a new City : <br>
                   <input type="text" name="c_name" class="col-md-12" style="color: black;padding: 7px;padding-left: 13px;border-radius: 5px;margin-bottom: 7px;text-transform:uppercase" placeholder="Enter city's name">
                   <span style="color: red;">*</span>Specify a small description :
@@ -94,7 +111,7 @@ include 'session.php';
                   <span style="color: red;">*</span>Upload a thumbnail picture :
                   <input type="hidden" name="MAX_FILE_SIZE" value="4100000">
                   <input type="file" name="image" required/><br>
-                  <input style="background:#2ecc71;color: white;border-radius: 5px; width: 100px" type="submit" value="Add City" name="upload">
+                  <input style="background:#2ecc71;color: white;border-radius: 5px; width: 100px" type="submit" value="Add City" name="submit">
               </form>
                 </fieldset>
               </div>  

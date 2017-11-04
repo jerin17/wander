@@ -1,12 +1,3 @@
-<?php
-
-@$conn = mysqli_connect('localhost','root','seoul','travel');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-$c_id=3;
-
-?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +11,7 @@ $c_id=3;
 
 <?php 
 include 'session.php';
-
+include 'config.php';
   session_start();
   if(!isset($_SESSION['c_id']))
   {
@@ -30,10 +21,7 @@ include 'session.php';
   
   else 
     {$c_id = $_SESSION['c_id'];}      
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +119,7 @@ include 'session.php';
                  <h3 style="text-transform: uppercase;"><?php echo $row111['p_name']; ?></h3>
                 </div>
 
-                <img style="float: right; margin-right: 20px;position: relative;top: 70px; left: 20px" src="place/<?php echo $row111['p_image'];?>" width='100' height='100'><br>
+                <img style="float: right; margin-right: 20px;position: relative;top: 70px; left: 20px;margin-bottom: 40px;" src="place/<?php echo $row111['p_image'];?>" width='100' height='100'><br>
              
                <table style="border-collapse: collapse; color: white;">
                     <tr>
@@ -156,7 +144,7 @@ include 'session.php';
 
                 </table>           
 
-                <a href="adm_place_del.php?p_id=<?php echo $row2['p_id'];?>" onclick="return confirm('Do you want to delete this record ?')"><button style="float: right; margin-top: 5px;" class="col-md-1 alert-warning">delete</button></a>
+                <br><a href="adm_place_del.php?p_id=<?php echo $row2['p_id'];?>" onclick="return confirm('Do you want to delete this record ?')"><button style="float: right; margin-top: 5px;" class="col-md-1 alert-warning">delete</button></a>
                 <a href="adm_place_edit.php?p_id=<?php echo $row2['p_id'];?>"><button style="float: right;margin-top: 5px; margin-right: 4px;" class="col-md-1 alert-warning">edit</button></a><br><br>
 
   <hr>

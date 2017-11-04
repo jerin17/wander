@@ -1,5 +1,51 @@
 <?php 
 include 'session.php';
+
+    if (isset($_POST['upload']))
+    {
+        $target = "place/".basename($_FILES['image']['name']);
+        
+        include 'config.php';
+
+        $image = $_FILES['image']['name'];
+    @$c_id=$_GET['c_id'];
+    $p_name = mysqli_real_escape_string($conn, $_POST['p_name']);
+    $p_description = mysqli_real_escape_string($conn, $_POST['p_description']);
+    $p_address = mysqli_real_escape_string($conn, $_POST['p_address']);
+    $p_height = mysqli_real_escape_string($conn, $_POST['p_height']);
+    $p_fact = mysqli_real_escape_string($conn, $_POST['p_fact']);
+
+        if($p_fact=="")
+        {
+            $p_fact="N/A";
+        }
+
+        if($p_height=="")
+        {
+            $p_height="N/A";
+        }
+    
+
+
+        $sql = "INSERT INTO place (c_id,p_name,p_description,p_address,p_height,p_fact,p_image) 
+            VALUES ('$c_id','$p_name','$p_description','$p_address','$p_height','$p_fact','$image')";
+
+        if ($conn->query($sql) === TRUE) {
+          echo "successfully added";
+      } else {
+          echo "Error updating record: " . $conn->error;
+      }
+
+        if (@move_uploaded_file($_FILES['image']['tmp_name'] , $target))
+        {
+            echo "uploaded";
+              header('Location:adm_place2.php');
+        }
+        else
+        {
+            echo "error ".$conn->error;   
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +124,7 @@ include 'session.php';
                 ?>
 
 
-              <form action="adm_place_add2.php?c_id=<?php echo $c_id?>" method="post" enctype="multipart/form-data">
+              <form action="adm_place_add.php?c_id=<?php echo $c_id?>" method="post" enctype="multipart/form-data">
                   City : <br>
                   <input type="text" name="c_name" class="col-md-12" style="color: black;padding: 7px;padding-left: 13px;border-radius: 5px;margin-bottom: 7px; text-align: center; font-size: 18px;" value="<?php echo $row['c_name']; ?>" disabled><br>
 

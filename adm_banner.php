@@ -1,9 +1,28 @@
 <?php
+include 'config.php';
+include 'session.php';
 
-@$conn = mysqli_connect('localhost','root','seoul','travel');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+    if (isset($_POST['upload']))
+    {
+        $target = "banner/".basename($_FILES['image']['name']);
+        
+        include 'config.php';
+        $image = $_FILES['image']['name'];
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
+        $sql = "INSERT INTO banner (image,description) VALUES ('$image','$description')";
+        mysqli_query($conn , $sql); //insert images into image table.
+        
+        //now lets move data to folder images.
+        if (@move_uploaded_file($_FILES['image']['tmp_name'] , $target))
+        {
+            echo "uploaded";
+            header('Location:adm_banner.php');
+        }
+        else
+        {
+            echo "error ".$conn->error;   
+        }
+    }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,10 +35,6 @@ if ($conn->connect_error) {
 
 <body>
 
-
-<?php 
-include 'session.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +102,7 @@ include 'session.php';
                 <fieldset>
                 <legend style="color: white;">Add Banner</legend>
 
-              <form action="adm_banner2.php" method="post" enctype="multipart/form-data">
+              <form action="adm_banner.php" method="post" enctype="multipart/form-data">
                   Add a new Banner : <br>
                   <input type="hidden" name="MAX_FILE_SIZE" value="4100000">
                   <input type="file" name="image" required/><br>

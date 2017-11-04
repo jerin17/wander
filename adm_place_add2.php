@@ -28,7 +28,6 @@
 
         $sql = "INSERT INTO place (c_id,p_name,p_description,p_address,p_height,p_fact,p_image) 
         		VALUES ('$c_id','$p_name','$p_description','$p_address','$p_height','$p_fact','$image')";
-        // mysqli_query($conn , $sql); //insert images into image table.
 
         if ($conn->query($sql) === TRUE) {
 			    echo "successfully added";
@@ -36,8 +35,6 @@
 			    echo "Error updating record: " . $conn->error;
 			}
 
-
-        //now lets move data to folder images.
         if (@move_uploaded_file($_FILES['image']['tmp_name'] , $target))
         {
             echo "uploaded";

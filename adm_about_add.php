@@ -61,10 +61,10 @@ include 'session.php';
       <div class="col-md-offset-2" style="background: #2c3e50 ; color: white; border-radius: 10px" >
           <h1 style="color:#2ecc71;">ADD PARAGRAPH</h1><br>
           <div class="row text-center">
-        <form action="adm_about_add2.php" method="POST">  
+        <form action="adm_about_add.php" method="POST">  
                <textarea rows="3" cols="80" name="para" style="color: black;margin-bottom: 7px;" required></textarea>
           </div>
-          <br><input style="background:#2ecc71;color: white;border-radius: 5px;" type="submit" value="Add this paragraph" name="edit"><hr>
+          <br><input style="background:#2ecc71;color: white;border-radius: 5px;" type="submit" value="Add this paragraph" name="submit"><hr>
         </form>        
       </div>
   </div>
@@ -77,3 +77,22 @@ include 'session.php';
     <script src="assets/js/custom.js"></script>
     </body>
 </html>
+
+<?php
+
+if (isset($_POST['submit']))
+{
+include 'config.php';
+$para = mysqli_real_escape_string($conn, $_POST['para']);
+
+
+$sql = "INSERT INTO about_us (para) VALUES ('$para')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $conn->error;
+}
+header('Location:adm_about.php');
+}
+?>

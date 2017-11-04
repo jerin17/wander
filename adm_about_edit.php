@@ -1,3 +1,22 @@
+<?php
+
+if (isset($_POST['submit']))
+{
+include 'config.php';
+$id=$_GET['id'];
+$para = mysqli_real_escape_string($conn, $_POST['para']);
+
+$sql = "UPDATE about_us SET para='$para' WHERE about_us.id='$id'";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $conn->error;
+}
+header('Location:adm_about.php');
+}
+
+?>
 <?php 
 include 'session.php';
 include 'config.php';
@@ -71,7 +90,7 @@ $row=mysqli_fetch_assoc($result);
         <form action="adm_about_edit2.php?id=<?php echo $row['id'];?>" method="POST">  
                <textarea rows="7" cols="100" name="para" style="color: black;margin-bottom: 7px; padding: 15px;" required> <?php echo $row['para'];?></textarea>
           </div>
-          <br><input style="background:#2ecc71;color: white;border-radius: 5px;" type="submit" value="EDIT" name="edit"><hr>
+          <br><input style="background:#2ecc71;color: white;border-radius: 5px;" type="submit" value="EDIT" name="submit"><hr>
         </form>        
       </div>
   </div>

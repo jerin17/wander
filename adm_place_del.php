@@ -3,7 +3,6 @@
 include 'config.php';
 $p_id=$_GET['p_id'];
 
-
 $sql2="SELECT * FROM place WHERE p_id='$p_id'";
 $result2=mysqli_query($conn,$sql2);
 $row2=mysqli_fetch_assoc($result2);
@@ -23,6 +22,5 @@ else {
 }
 
  	header('Location: adm_place2.php');
-
-
+ 	
 ?>
