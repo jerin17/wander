@@ -119,7 +119,7 @@ include 'config.php';
                  <h3 style="text-transform: uppercase;"><?php echo $row111['p_name']; ?></h3>
                 </div>
 
-                <img style="float: right; margin-right: 20px;position: relative;top: 70px; left: 20px;margin-bottom: 40px;" src="place/<?php echo $row111['p_image'];?>" width='100' height='100'><br>
+                <img style="float: right; margin-right: 20px;position: relative;top: 30px; left: 20px;margin-bottom: 40px;" src="place/<?php echo $row111['p_image'];?>" width='100' height='100'><br>
              
                <table style="border-collapse: collapse; color: white;">
                     <tr>
@@ -144,8 +144,8 @@ include 'config.php';
 
                 </table>           
 
-                <br><a href="adm_place_del.php?p_id=<?php echo $row2['p_id'];?>" onclick="return confirm('Do you want to delete this record ?')"><button style="float: right; margin-top: 5px;" class="col-md-1 alert-warning">delete</button></a>
-                <a href="adm_place_edit.php?p_id=<?php echo $row2['p_id'];?>"><button style="float: right;margin-top: 5px; margin-right: 4px;" class="col-md-1 alert-warning">edit</button></a><br><br>
+                <br><a href="adm_place_del.php?p_id=<?php echo $row111['p_id'];?>" onclick="return confirm('Do you want to delete this record ?')"><button style="float: right; margin-top: 5px;" class="col-md-1 alert-warning">delete</button></a>
+                <a href="adm_place_edit.php?p_id=<?php echo $row111['p_id'];?>"><button style="float: right;margin-top: 5px; margin-right: 4px;" class="col-md-1 alert-warning">edit</button></a><br><br>
 
   <hr>
 
